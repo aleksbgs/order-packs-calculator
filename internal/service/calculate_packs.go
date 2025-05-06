@@ -5,10 +5,20 @@ import (
 	"order-packs-calculator/internal/infrastructure/repository" // Changed from internal/repository to internal/infrastructure/repository
 )
 
+// CalculatePacksService defines the interface for the CalculatePacksUseCase
+type CalculatePacksService interface {
+	Execute(orderAmount int) (map[int]int, int, error)
+	UpdatePackSizes(newSizes []int) error
+	GetPackSizes() ([]int, error)
+}
+
 // CalculatePacksUseCase defines the service for calculating packs
 type CalculatePacksUseCase struct {
 	repo repository.PackRepository // Repository interface to fetch pack sizes
 }
+
+// Ensure CalculatePacksUseCase implements CalculatePacksService
+var _ CalculatePacksService = (*CalculatePacksUseCase)(nil)
 
 // NewCalculatePacksUseCase creates a new instance of CalculatePacksUseCase
 func NewCalculatePacksUseCase(repo repository.PackRepository) *CalculatePacksUseCase {
@@ -24,7 +34,7 @@ func (uc *CalculatePacksUseCase) Execute(orderAmount int) (map[int]int, int, err
 	}
 
 	// Call the domain function to calculate packs using the fetched pack sizes
-	return domain.CalculatePacks(packSizes, orderAmount) // Changed from entity to domain
+	return domain.CalculatePacks(packSizes, orderAmount) // Pass the []int directly to the domain layer
 }
 
 // UpdatePackSizes updates the pack sizes in the repository

@@ -8,12 +8,12 @@ import (
 
 // PackController handles HTTP requests for pack calculations
 type PackController struct {
-	calculatePacks *service.CalculatePacksUseCase // Reference to the service layer for calculating packs
-	logger         *logging.Logger                // Logger instance for logging requests and errors
+	calculatePacks service.CalculatePacksService // Changed to interface for testability
+	logger         *logging.Logger               // Logger instance for logging requests and errors
 }
 
 // NewPackController creates a new instance of PackController
-func NewPackController(calculatePacks *service.CalculatePacksUseCase, logger *logging.Logger) *PackController {
+func NewPackController(calculatePacks service.CalculatePacksService, logger *logging.Logger) *PackController {
 	return &PackController{
 		calculatePacks: calculatePacks, // Initialize the service
 		logger:         logger,         // Initialize the logger

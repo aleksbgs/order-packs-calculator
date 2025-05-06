@@ -49,12 +49,6 @@ test-unit:
 test-integration:
 	$(GO) test -v ./tests/...
 
-# Run tests with coverage
-.PHONY: test-coverage
-test-coverage:
-	$(GO) test ./internal/... -coverprofile=coverage_internal.out
-	$(GO) test ./tests/... -coverprofile=coverage_tests.out
-
 # Clean up generated files
 .PHONY: clean
 clean:

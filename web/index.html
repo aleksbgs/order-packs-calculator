@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Packs Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .section { margin-bottom: 20px; }
+        button { background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        input, textarea { margin: 5px; padding: 5px; }
+        #result { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<h1>Order Packs Calculator</h1>
+
+<div class="section">
+    <h2>Pack Sizes</h2>
+    <textarea id="packSizes" rows="5" cols="30" placeholder="Enter pack sizes (one per line)"></textarea><br>
+    <button onclick="updatePackSizes()">Submit pack sizes change</button>
+</div>
+
+<div class="section">
+    <h2>Calculate packs for order</h2>
+    <label>Items: </label>
+    <input type="number" id="orderAmount" value="263"><br>
+    <button onclick="calculatePacks()">Calculate</button>
+</div>
+
+<div id="result">
+    <h3>Result</h3>
+    <table border="1">
+        <thead>
+        <tr><th>Pack</th><th>Quantity</th></tr>
+        </thead>
+        <tbody id="resultTable"></tbody>
+    </table>
+    <p>Total Items: <span id="totalItems">0</span></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

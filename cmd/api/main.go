@@ -1,6 +1,7 @@
 package main // Define the package name as "main" for the application entry point
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log" // Import the log package for logging errors
 	"order-packs-calculator/internal/presentation/http"
 
@@ -33,6 +34,15 @@ func main() {
 
 	// Create a new Fiber application instance
 	app := fiber.New()
+
+	// Add CORS middleware to allow cross-origin requests
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:3000,http://localhost:63342", // Allow requests from both origins
+		AllowMethods:     "GET,POST,OPTIONS",                             // Include OPTIONS for preflight requests
+		AllowHeaders:     "Content-Type",                                 // Allow Content-Type header
+		AllowCredentials: false,                                          // Set to true if credentials (e.g., cookies) are needed
+		MaxAge:           86400,                                          // Cache preflight response for 24 hours
+	}))
 
 	// Serve static files from the ./web directory (for the UI)
 	app.Static("/", "./web")

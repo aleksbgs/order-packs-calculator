@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Map port 3000 on the host to port 3000 in the container
+    volumes:
+      - .:/app # Mount the current directory for development (optional)
+    environment:
+      - PORT=3000 # Optional: Set environment variable for the port
+    restart: unless-stopped
